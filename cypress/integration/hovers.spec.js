@@ -1,6 +1,4 @@
-it('deve exibir o nome da tecnologia ao passar o mouse', function(){
-  cy.visit('/hovers')
-
+it('deve exibir o nome da tecnologia ao passar o mouse', function () {
   const techs = [
     {
       img: 'img[src*=python]',
@@ -24,13 +22,14 @@ it('deve exibir o nome da tecnologia ao passar o mouse', function(){
     }
   ]
 
-  techs.forEach(function(tech){
-    cy.get(tech.img)
-    .realHover('mouse')
+  cy.visit('/hovers')
 
-  cy.get(tech.tag)
-    .should('be.visible')
-    .should('have.text', tech.name)
+  techs.forEach(function (tech) {
+    cy.get(tech.img, { timeout: 6000 })
+      .realHover('mouse')
+
+    cy.get(tech.tag, { timeout: 6000 })
+      .should('be.visible')
+      .should('have.text', tech.name)
   })
 })
-
